@@ -8,6 +8,14 @@ let resultado = false;
 
 const operadores = ["+", "-", "x", "/"];
 
+function reset() {
+    num1 = "";
+    num2 = "";
+    operacao = "";
+    resultado = false;
+    visor.textContent = "0";
+}
+
 function calcular(num1, num2, operacao) {
 
     switch(operacao)  {
@@ -31,7 +39,22 @@ function calcular(num1, num2, operacao) {
 botoes.forEach((botao) => {
     botao.addEventListener("click", () => {
 
-        if (operadores.includes(botao.textContent)) {
+        if (botao.textContent === "C") {
+            reset();
+
+        } else if(botao.textContent === ".") {
+            if (operacao === "") {
+
+                if (!num1.includes(".")) {
+                    num1 = num1 + ".";
+                }
+            } else {
+
+                if (!num2.includes(".")) {
+                    num2 = num2 + ".";
+                }
+            }
+        } else if (operadores.includes(botao.textContent)) {
             operacao = botao.textContent;
 
         } else if (botao.textContent === "=") {
@@ -41,7 +64,13 @@ botoes.forEach((botao) => {
             resultado = true;
         } else {
 
-            if (operacao === "") {
+            if (resultado === true) {
+                num1 = botao.textContent;
+                num2 = "";
+                operacao = "";
+                resultado = false;
+
+            } else if (operacao === "") {
                 num1 = num1 + botao.textContent;
 
             } else {
@@ -49,10 +78,10 @@ botoes.forEach((botao) => {
             }
         }
 
-        if (botao.textContent !== "=") {
+        if (botao.textContent !== "=" && botao.textContent !== "C") {
 
             visor.textContent = num1 + operacao + num2;
-            
+
         }
     });
 });
