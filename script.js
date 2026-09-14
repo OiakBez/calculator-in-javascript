@@ -41,6 +41,23 @@ botoes.forEach((botao) => {
 
         if (botao.textContent === "C") {
             reset();
+        
+        } else if (botao.textContent === "+/-"){
+            if (operacao === "") {
+
+                if (num1.startsWith("-")) {
+                    num1 = num1.slice(1);
+                } else {
+                    num1 = "-" + num1;
+                }
+            } else {
+            
+                if (num2.startsWith("-")) {
+                    num2 = num2.slice(1);
+                } else {
+                    num2 = "-" + num2;
+                }
+            }
 
         } else if(botao.textContent === ".") {
             if (operacao === "") {
