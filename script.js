@@ -55,13 +55,23 @@ botoes.forEach((botao) => {
                 }
             }
         } else if (operadores.includes(botao.textContent)) {
-            operacao = botao.textContent;
+
+            if (resultado === true) {
+                num1 = visor.textContent;
+                num2 = "";
+                operacao = botao.textContent;
+                resultado = false
+            } else {
+                operacao = botao.textContent;
+            }
 
         } else if (botao.textContent === "=") {
 
-            visor.textContent = calcular(num1, num2, operacao);
-
-            resultado = true;
+            if (num1 !== "" && num2 !== "" && operacao !== "") {
+                visor.textContent = calcular(num1, num2, operacao);
+                resultado = true;
+            } 
+    
         } else {
 
             if (resultado === true) {
