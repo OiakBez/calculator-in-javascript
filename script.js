@@ -18,6 +18,11 @@ function reset() {
 
 function calcular(num1, num2, operacao) {
 
+    if (num2.startsWith("(")) {
+
+        num2 = num2.replace("(", "").replace(")", "");
+    }
+
     switch(operacao)  {
 
         case "+":
@@ -43,22 +48,30 @@ botoes.forEach((botao) => {
             reset();
         
         } else if (botao.textContent === "+/-"){
+
             if (operacao === "") {
 
-                if (num1.startsWith("-")) {
-                    num1 = num1.slice(1);
-                } else {
-                    num1 = "-" + num1;
+                if (num1 !== ""){
+                    if (num1.startsWith("-")) {
+                        num1 = num1.slice(1);
+                    } else {
+                        num1 = "-" + num1;
+                    }
+
+                    visor.textContent = num1;
                 }
             } else {
-            
-                if (num2.startsWith("-")) {
-                    num2 = num2.slice(1);
-                } else {
-                    num2 = "-" + num2;
+
+                if (num2 !== "") {
+                    if (num2.startsWith("-")) {
+                        num2 = num2.slice(1);
+                    } else {
+                        num2 = "(" + "-" + num2 + ")";
+                    }
+
+                    visor.textContent = num1 + operacao + num2;
                 }
             }
-
         } else if(botao.textContent === ".") {
             if (operacao === "") {
 
@@ -105,7 +118,7 @@ botoes.forEach((botao) => {
             }
         }
 
-        if (botao.textContent !== "=" && botao.textContent !== "C") {
+        if (botao.textContent !== "=" && botao.textContent !== "C" && botao.textContent !== "+/-") {
 
             visor.textContent = num1 + operacao + num2;
 
